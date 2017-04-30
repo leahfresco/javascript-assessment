@@ -87,16 +87,20 @@
   function multForm(evt){
     evt.preventDefault();
 
-    mutliplesList = [];
-    biggestMultiple.html = document.getElementById('max');
-    multipleNum.value = document.getElementById('mults-of');
+    var multiplesList = [];
+    var biggestMultiple = document.getElementById('max').value;
+    var multipleNum = Number(document.getElementById('mults-of').value);
     
-    console.log(biggestMultiple);
-    console.log(multipleNum);
+    var addMultiple = multipleNum;
 
+    while (addMultiple <= biggestMultiple) {
+      multiplesList.push(addMultiple);
+      addMultiple += multipleNum;
+    }
+    console.log(multiplesList);
   }
 
-  var submitMult = document.getElementById('multiply-btn');
+  var submitMult = document.getElementById('multiplying-form');
   submitMult.addEventListener('submit', multForm);
 
 </script>
@@ -129,9 +133,12 @@
   <input type="button" class="find-me" value="Pop-Up Please!">
 </fieldset>
 
+<script src="https://code.jquery.com/jquery.js"></script>
+
 <script>
-  "use strict";
-  // code here for above problem
+
+  $('.find-me').on('click', function() {alert("Surprise!");});
+
 </script>
 
 <div class="hint">
@@ -163,7 +170,12 @@
 
 <script>
   "use strict";
-  // put your code here
+
+function makePorcupine(){
+  setTimeout(function() { $('#cute-porcupine-image').attr("style", "display: block"); }, 1000);
+}
+
+  $('#make-a-porcupine').on('click', makePorcupine); 
 </script>
 
 <div class="hint">
@@ -194,7 +206,15 @@
 
 <script>
   "use strict";
-  // put your code here
+  
+  function agreeableFood(evt){
+    evt.preventDefault();
+
+    $('#agreeable-text').html("I like "+ $('#favorite-food-input').val() + ", too.");
+  }
+
+  $('#agreeable-form').on('submit', agreeableFood);
+
 </script>
 
 <div class="hint">

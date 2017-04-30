@@ -38,13 +38,11 @@
 
 <script>
   "use strict";
-  function changeGoodbye(){
-    var message = document.getElementById('message-to-change');
-    message.innerHTML = 'goodbye';
-  }
 
+  // Event listener for when button is pressed with inline function to change text
   var helloButton = document.getElementById('change-hello-to-goodbye-button');
-  helloButton.addEventListener('click', changeGoodbye)
+  helloButton.addEventListener('click', 
+      function(){document.getElementById('message-to-change').innerHTML ='goodbye';});
 </script>
 
 <div class="hint">
@@ -73,10 +71,11 @@
 <script>
   "use strict";
   function submitAlert(evt){
-    evt.preventDefault();
-    alert("Alert instead of submitting!");
+    evt.preventDefault(); // Prevent form from submitting
+    alert("Alert instead of submitting!"); // Show an alert instead
   }
 
+  // Event listener for when a user submit the form
   var preventSubmit = document.getElementById('prevent-form-submission-form');
   preventSubmit.addEventListener('submit', submitAlert);
   
@@ -141,22 +140,28 @@
 
 <script>
   "use strict";
-  // if user enters 5, result will be 1 + 2 + 3 + 4 + 5 = 15
+  
   function sumNumbers(evt){
-    evt.preventDefault();
+    evt.preventDefault(); // Prevent form from sending
 
+    // Field to specify which number to end summation from 1+2+3+4+..+n
     var nNumber = document.getElementById('sum-to-n-field');
+    
+    // Find value and cast to a number
     nNumber = Number(nNumber.value);
 
+    // Loop through to find summation
     var totalSum = 0;
     for (var i = 1; i <= nNumber; i++){
       totalSum += i;
     }
 
+    // Put total sum in the result field
     var resultField = document.getElementById('sum-to-n-result');
     resultField.innerHTML = totalSum;
   }
 
+  // Event listener for when a user inputs a number into the form
   var sumForm = document.getElementById('sum-to-n');
   sumForm.addEventListener('submit', sumNumbers)
 
@@ -192,9 +197,12 @@
   "use strict";
 
   function changeToDog(){
+
+    // Change cat picture to dog picture
     $('#kittenz-rule').attr('src', 'http://68.media.tumblr.com/8de5ae62f88160aba8caa565bac5c282/tumblr_inline_ojoqmdQyj11qd834x_500.jpg');
   }
 
+// Event listener for double click on cat picture
 $('#kittenz-rule').on('dblclick', changeToDog);
   
 </script>
@@ -231,9 +239,17 @@ $('#kittenz-rule').on('dblclick', changeToDog);
   var randomNumber;
   
   function startGuessingGame(evt){
+
+    // Disable button to start playing game
     $('#play-guessing-game').prop('disabled', true);
+
+    // Pick random number
     randomNumber = Math.floor((Math.random() * 100) + 1)
+
+    // Display to user to guess a number
     $('#number-guessing-msg').html("Guess what number between 1 and 100 I picked!");
+
+    // Enable form to allow for guesses
     $('#number-guessed').prop('disabled', false);
     $('#try-this-number').prop('disabled', false);
   }
@@ -243,6 +259,7 @@ $('#kittenz-rule').on('dblclick', changeToDog);
 
     var guessedNumber = Number($('#number-guessed').val());
     
+    // If block to compare guessed number to randomly chosen integer
     if (guessedNumber > randomNumber) {
       $('#number-guessing-msg').html("You guessed too high!");
     }
@@ -333,13 +350,16 @@ $('#kittenz-rule').on('dblclick', changeToDog);
   }
 
   function trexAttack(evt){
-    evt.preventDefault();
+    evt.preventDefault(); // Prevent form from sending
 
+    // Get T-rex target from form
     var attackDetails = {'attack target' : $('#t-rex-target').val() };
 
+    // Send AJAX post request with t-rex target to show results
     $.post("/t-rex-attack.json", attackDetails, showTRexResults);
   }
 
+  // Event Listener for when form is submitted
   $('#t-rex-form').on('submit', trexAttack);
 
 </script>
